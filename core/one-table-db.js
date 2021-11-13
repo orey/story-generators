@@ -11,8 +11,10 @@
 "use strict";
 const fs = require('fs')
 
-const SEP='|';
-const COMMENT='//';
+const SEP = '|';
+const COMMENT = '//';
+
+let DB = [];
 
 
 
@@ -24,6 +26,7 @@ function readDatabase(filename, verbose=false) {
         // split the contents by new line
         const lines = data.split(/\r?\n/);
         
+        let i = 0;
         // print all lines
         lines.forEach((line) => {
             if ((line.startsWith(COMMENT)) && verbose) 
@@ -35,9 +38,13 @@ function readDatabase(filename, verbose=false) {
                 // line is supposed to be a triple
                 if (tab.length != 3) 
                     console.log("Malformed line (not 3 separators).\n%s\nSkipping...", line);
-                else
+                else {
                     //console.log(tab);
                     console.log("Line: %s - %s - %s", tab[0], tab[1], tab[2]);
+                    DB[i] = tab;
+                    i += 1;
+                    console.log(DB);
+                }
             }
         });
     }
