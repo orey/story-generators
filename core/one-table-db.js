@@ -43,14 +43,18 @@ function readDatabase(filename, verbose=false) {
                     console.log("Line: %s - %s - %s", tab[0], tab[1], tab[2]);
                     DB[i] = tab;
                     i += 1;
-                    console.log(DB);
                 }
             }
+            console.log(DB);
         });
     }
     catch (err) {
         console.error(err);
     }
+}
+
+function query(subject, predicate, object) {
+
 }
 
 
