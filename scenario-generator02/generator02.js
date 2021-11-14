@@ -7,8 +7,8 @@
  ***********************************************/
 "use strict";
 
-let dice = undefined;
-let lists = undefined;
+const dice = undefined;
+const onetabledb = undefined;
 
 /*
  * Do I really need require.js?
@@ -17,7 +17,7 @@ let lists = undefined;
 
 if (typeof require !== 'undefined') {
     dice = require("../core/dice");
-    lists = require("./lists");
+    onetabledb = require("../core/one-table-db");
 }
 else
 {
