@@ -57,10 +57,25 @@ class OneTableDB {
 
     /*****************************************/
 
+    select(s, p, o) {
+        return this.selectWithMatchingFunction(s, p, o, function (x, y) {
+            return (x == y) ? true : false;
+        });
+
+    }
+    
+    selectBlur(s, p, o) {
+        return this.selectWithMatchingFunction(s, p, o, function (x, y) {
+            // y sub part of x
+            return x.includes(y) ? true : false;
+        });
+
+    }
+
     /*
       For the moment the query is simple: variables are accepted in the triple
     */
-    select(s, p, o) {
+    selectWithMatchingFunction(s, p, o, f) {
         let variables = 0;
         if (s.startsWith(QUESTION))
             variables += 4; // 100
@@ -76,32 +91,32 @@ class OneTableDB {
             switch (variables) {
             case 1: 
                 // 001 value value ?var
-                if ((line[0] == s) && (line[1] == p))
+                if (f(line[0], s) && f(line[1], p))
                     results.push(line);
                 break;
             case 2:
                 // 010 value ?var value
-                if ((line[0] == s) && (line[2] == o))
+                if (f(line[0], s) && f(line[2], o))
                     results.push(line);
                 break;
             case 4:
                 // 100 ?var value value
-                if ((line[1] == p) && (line[2] == o))
+                if (f(line[1], p) && f(line[2], o))
                     results.push(line);
                 break;
             case 3:
                 // 011 value ?var ?var
-                if (line[0] == s)
+                if (f(line[0], s))
                     results.push(line);
                 break;
             case 5:
                 // 101 ?var value ?var
-                if (line[1] == p)
+                if (f(line[1], p))
                     results.push(line);
                 break;
             case 6:
             // 110 ?var ?var value
-                if (line[2] == 0)
+                if (f(line[2], o))
                     results.push(line);
                 break;
             case 7:
@@ -134,7 +149,9 @@ function test() {
     console.log(db.select("?", "?", "?"));
     let results = db.select("?", "a", "turtle");
     console.log(results.length)
-    
+    console.log("******************");
+    console.log(db.selectBlur("?", "?", "gen"));
+    console.log(db.selectBlur("the", "?", "?"));
 }
 
 test()
