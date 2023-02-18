@@ -6,22 +6,36 @@
  ***********************************************/
 "use strict";
 
-function capFirst(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
+const Adj  = require("./adjectifs.js");
+const Rand = require("./random.js");
+const Nom  = require("./nom.js");
+
+function capFirst(str) {
+    return str[0].toUpperCase() + str.slice(1);
 }
 
-function getRandomInt(min, max) {
-  	return Math.floor(Math.random() * (max - min)) + min;
+function generate(n){
+    let tab = Rand.chooseInList(Adj.ADJECTIFS, n);
+    let str = "";
+    for (let i=0;i<n;i++)
+        str += capFirst(tab[i]) + " ";
+    return str;
 }
 
-function generate(list1, list2){
-    return capFirst(list1[getRandomInt(0, list1.length + 1)])
-        + " "
-        + capFirst(list2[getRandomInt(0, list2.length + 1)]);
-}
+console.log("---");
+console.log(generate(1));
+console.log("---");
+console.log(generate(5));
+console.log("---");
+console.log(generate(10));
+console.log("---");
 
+console.log(Nom.generateNoms(3, "VCCV"));
+console.log("---");
+console.log(Nom.generateNoms(3, "CVCCVCVV"));
+console.log("---");
+console.log(Nom.generateNoms(2, "VCVVC CVC CVVCCVC"));
+console.log("---");
 
-
-console.log(generate());
 
 
