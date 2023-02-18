@@ -30,11 +30,11 @@ console.log("---");
 console.log(generate(10));
 console.log("---");
 
-console.log(Nom.generateNoms(3, "VCCV"));
+console.log(Nom.generateNoms(3, "CVCV"));
 console.log("---");
-console.log(Nom.generateNoms(3, "CVCCVCVV"));
+console.log(Nom.generateNoms(3, "VCCV CVV"));
 console.log("---");
-console.log(Nom.generateNoms(2, "VCVVC CVC CVVCCVC"));
+console.log(Nom.generateNoms(2, "CVC VVCV CVCVV"));
 console.log("---");
 
 
