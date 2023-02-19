@@ -117,6 +117,7 @@ function testAllRandom() {
  *--------------------------------------*/
 if (typeof module !== "undefined" && module.exports) {
     module.exports = {
+        getRandom,
         testAllRandom,
         testChooseInList,
         dice,
